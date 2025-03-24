@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresas</title>
+</head>
+<body>
+    <h2>Empresas</h2>
+    <table width="50%" align="center">
+        <tr>
+            <td width="50%">
+                <b>EMPRESA</b>
+            </td>
+            <td>
+                <b>VER PAGINA</b>
+            </td>
+        </tr>
+        <tbody id="empresa-list">
+        </tbody>
+    </table>
+
+    <!-- Formulario para crear una empresa -->
+    <h3>Crear Empresa</h3>
+    <form id="createEmpresaForm">
+        <label for="denominacion">Denominación:</label>
+        <input type="text" id="denominacion" name="denominacion" required>
+        <br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono">
+        <br>
+
+        <label for="horarioAtencion">Horario de Atención:</label>
+        <input type="text" id="horarioAtencion" name="horarioAtencion">
+        <br>
+
+        <label for="quienesSomos">Quiénes Somos:</label>
+        <textarea id="quienesSomos" name="quienesSomos"></textarea>
+        <br>
+
+        <label for="latitud">Latitud:</label>
+        <input type="number" step="any" id="latitud" name="latitud">
+        <br>
+
+        <label for="longitud">Longitud:</label>
+        <input type="number" step="any" id="longitud" name="longitud">
+        <br>
+
+        <label for="domicilio">Domicilio:</label>
+        <input type="text" id="domicilio" name="domicilio">
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+        <button type="submit">Crear Empresa</button>
+    </form>
+
+    <script>
+        const apiUrl = 'http://localhost:8080/api/empresas';
+
+        async function cargarEmpresas() {
+            try {
+                const response = await fetch(apiUrl);
+                const empresas = await response.json();
+
+                const empresaList = document.getElementById("empresa-list");
+                empresaList.innerHTML = '';
+
+                empresas.forEach(empresa => {
+                    const row = document.createElement('tr');
+                    
+                    const cellEmpresa = document.createElement('td');
+                    cellEmpresa.textContent = empresa.denominacion;
+                    row.appendChild(cellEmpresa);
+
+                    const cellLink = document.createElement('td');
+                    const link = document.createElement('a');
+                    link.href = `home.html?id=${empresa.id}`;
+                    link.textContent = 'URL PAGINA HOME';
+                    cellLink.appendChild(link);
+                    row.appendChild(cellLink);
+
+                    empresaList.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Error al cargar las empresas:", error);
+            }
+        }
+
+        // Función para crear una empresa
+        async function crearEmpresa(event) {
+            event.preventDefault();
+
+            const denominacion = document.getElementById("denominacion").value;
+            const telefono = document.getElementById("telefono").value;
+            const horarioAtencion = document.getElementById("horarioAtencion").value;
+            const quienesSomos = document.getElementById("quienesSomos").value;
+            const latitud = parseFloat(document.getElementById("latitud").value);
+            const longitud = parseFloat(document.getElementById("longitud").value);
+            const domicilio = document.getElementById("domicilio").value;
+            const email = document.getElementById("email").value;
+
+            const nuevaEmpresa = {
+                denominacion: denominacion,
+                telefono: telefono,
+                horarioAtencion: horarioAtencion,
+                quienesSomos: quienesSomos,
+                latitud: latitud,
+                longitud: longitud,
+                domicilio: domicilio,
+                email: email
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(nuevaEmpresa)
+                });
+
+                if (response.ok) {
+                    alert('Empresa creada con éxito');
+                    cargarEmpresas(); // Recargar la lista de empresas después de crear una nueva
+                    document.getElementById("createEmpresaForm").reset(); // Limpiar el formulario
+                } else {
+                    const errorMessage = await response.text();
+                    alert('Error al crear la empresa: ' + errorMessage);
+                }
+            } catch (error) {
+                console.error("Error al crear la empresa:", error);
+                alert('Hubo un problema con la solicitud.');
+            }
+        }
+
+        // Asignar el manejador del formulario
+        document.getElementById("createEmpresaForm").addEventListener("submit", crearEmpresa);
+
+        // Cargar las empresas cuando la página se cargue
+        window.onload = cargarEmpresas;
+    </script>
+</body>
+</html>
