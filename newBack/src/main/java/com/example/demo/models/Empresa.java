@@ -48,4 +48,8 @@ public class Empresa {
     
     @Column(length = 75, unique = true)
     private String email;
+
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean isActive = true;
+    
 }

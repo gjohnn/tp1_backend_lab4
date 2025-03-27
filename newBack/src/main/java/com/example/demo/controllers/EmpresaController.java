@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import com.example.demo.models.Empresa;
 import com.example.demo.repositories.EmpresaRepository;
 import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/empresas")
 @RequiredArgsConstructor
