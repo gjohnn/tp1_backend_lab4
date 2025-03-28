@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
-public class NoticiaDTO {
+public class NoticiaDTO {   
     private Long id;
 
     private String titulo;

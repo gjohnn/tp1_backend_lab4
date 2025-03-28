@@ -24,8 +24,9 @@
     <script src="js/rd-smoothscroll.min.js"></script>
 
     <!--JS Que Linkea Empresas y Noticias-->
-    <script src="js/datosEmpresa.js"></script>
-    <script src="js/datosNoticias.js"></script>
+    <script src="jsPropio/datosEmpresa.js"></script>
+    <script src="jsPropio/buscarNoticias.js"></script>
+    <script src="jsPropio/datosNoticias.js"></script>
     <!--JS Que Linkea Empresas y Noticias-->
 
 
@@ -76,14 +77,14 @@
 					  <a href="home.html">INICIO</a>
 					</li>
 					<li style="list-style: none;">
-					  <a href="./">LISTA EMPRESAS</a>
+					  <a href="./index.html">LISTA EMPRESAS</a>
 					</li>
 				  </ul>                           
 				</div>
 			</nav>
-			<form class="search-form" action="buscador.html" method="GET" accept-charset="utf-8">
+			<form class="search-form" id="searchForm" action="buscador.html" method="GET" accept-charset="utf-8">
 			  <label class="search-form_label">
-				<input class="search-form_input" type="text" name="buscar" autocomplete="off" placeholder="Ingrese Texto"/>
+				<input class="search-form_input" type="text" name="buscar" id="searchInput" autocomplete="off" placeholder="Ingrese Texto"/>
 				<span class="search-form_liveout"></span>
 			  </label>
 			  <button class="search-form_submit fa-search" type="submit"></button>
@@ -103,62 +104,56 @@
 
       <section class="well well1 well1_ins1">
         <div class="camera_container">
-          <div id="camera" class="camera_wrap">
-            <div data-src="images/page-1_slide1.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="jumbotron jumbotron1">
-                  <em>
-                    <!--Esto hay que agregarlo-->
-                    <a href="detalle.html">(DEBO COLOCAR EL TITULO DE LA NOTICIA QUE ESTA EN LA BASE DE DATOS)</a>
-                    <!--Esto hay que agregarlo-->                  
-                  </em>
-                  <div class="wrap">
-                    <p>
-                      Resumen
-                    </p>
-                    <a href="detalle.html" class="btn-link fa-angle-right"></a>
-                  </div>  
+            <div id="camera" class="camera_wrap">
+                <!-- Primer Slide -->
+                <div id="slide1" data-src="images/page-1_slide1.jpg">
+                    <div class="camera_caption fadeIn">
+                        <div class="jumbotron jumbotron1">
+                            <em>
+                                <a id="noticia1-link" href="#"></a>
+                            </em>
+                            <div class="wrap">
+                                <p id="noticia1-resumen"></p>
+                                <a id="noticia1-link-btn" href="#" class="btn-link fa-angle-right"></a>
+                            </div>  
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div data-src="images/page-1_slide2.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="jumbotron jumbotron2">
-                  <em>
-                    <!--Esto hay que agregarlo--> 
-                    (DEBO COLOCAR EL TITULO DE LA NOTICIA QUE ESTA EN LA BASE DE DATOS)
-                    <!--Esto hay que agregarlo--> 
-                  </em>
-                  <div class="wrap">
-                    <p>
-                      Resumen
-                    </p>
-                    <a href="#" class="btn-link hov_prime fa-angle-right"></a>
-                  </div>  
+    
+                <!-- Segundo Slide -->
+                <div id="slide2" data-src="images/page-1_slide2.jpg">
+                    <div class="camera_caption fadeIn">
+                        <div class="jumbotron jumbotron2">
+                            <em>
+                                <a id="noticia2-link" href="#"></a>
+                            </em>
+                            <div class="wrap">
+                                <p id="noticia2-resumen"></p>
+                                <a id="noticia2-link-btn" href="#" class="btn-link hov_prime fa-angle-right"></a>
+                            </div>  
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div data-src="images/page-1_slide3.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="jumbotron">
-                  <em>
-                    <!--Esto hay que agregarlo--> 
-                    (DEBO COLOCAR EL TITULO DE LA NOTICIA QUE ESTA EN LA BASE DE DATOS)
-                    <!--Esto hay que agregarlo--> 
-                  </em>
-                  <div class="wrap">
-                    <p>
-                      Resumen
-                    </p>
-                    <a href="#" class="btn-link fa-angle-right"></a>
-                  </div>  
+    
+                <!-- Tercer Slide -->
+                <div id="slide3" data-src="images/page-1_slide3.jpg">
+                    <div class="camera_caption fadeIn">
+                        <div class="jumbotron">
+                            <em>
+                                <a id="noticia3-link" href="#"></a>
+                            </em>
+                            <div class="wrap">
+                                <p id="noticia3-resumen"></p>
+                                <a id="noticia3-link-btn" href="#" class="btn-link fa-angle-right"></a>
+                            </div>  
+                        </div>
+                    </div>
                 </div>
-              </div>
+    
             </div>
-          </div>
         </div>
-      
-      </section>
+    </section>
+    
       
       <section class="well well2 wow fadeIn  bg1" data-wow-duration='3s'>
         <div class="container">
@@ -188,9 +183,10 @@
         </h2>
         </div>
     </section>
-	<div class="map">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11270.125646913215!2d-68.83492456656404!3d-32.88154997304907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1615335513448!5m2!1ses-419!2sar" width="1600" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="map">
+      <iframe id="mapa" width="1600" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
+  
 
     <section class="well1">
       <div class="container"> 
@@ -214,4 +210,39 @@
 
 
   </body>
+
+  <script>
+    // Suponiendo que tienes el id de la empresa ya disponible
+    const params = new URLSearchParams(window.location.search);
+    const idEmpresa= params.get("id");
+  
+    // Llamada a la API para obtener las últimas noticias
+    fetch(`http://localhost:8080/api/noticias/${idEmpresa}/ultimas`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length >= 3) {
+          // Reemplazar los valores del slider con las noticias obtenidas
+          document.getElementById("noticia1-link").textContent = data[0].titulo;
+          document.getElementById("noticia1-resumen").textContent = data[0].resumen;
+          document.getElementById("noticia1-link").href = `detalle.html?id=${data[0].id}`;
+          document.getElementById("slide1").setAttribute('data-src', data[0].imagen);
+  
+          document.getElementById("noticia2-link").textContent = data[1].titulo;
+          document.getElementById("noticia2-resumen").textContent = data[1].resumen;
+          document.getElementById("noticia2-link").href = `detalle.html?id=${data[1].id}`;
+          document.getElementById("slide2").setAttribute('data-src', data[1].imagen);
+  
+          document.getElementById("noticia3-link").textContent = data[2].titulo;
+          document.getElementById("noticia3-resumen").textContent = data[2].resumen;
+          document.getElementById("noticia3-link").href = `detalle.html?id=${data[2].id}`;
+          document.getElementById("slide3").setAttribute('data-src', data[2].imagen);
+        } else {
+          console.log("No hay suficientes noticias para mostrar.");
+        }
+      })
+      .catch(error => console.error('Error al obtener las noticias:', error));
+  </script>
+  
+
+  
 </html>

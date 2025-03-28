@@ -1,10 +1,9 @@
 package com.example.demo.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -41,6 +41,49 @@ public class NoticiaController {
             return ResponseEntity.badRequest().body("Error al buscar noticias");
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getNoticia(@PathVariable("id") Long id) {
+        try {
+            Optional<Noticia> optionalNoticia = noticiaRepository.findById(id);
+            if (optionalNoticia.isEmpty()) {
+                return ResponseEntity.badRequest().body("Noticia no encontrada");
+            }
+            return ResponseEntity.ok(optionalNoticia.get());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al buscar noticia");
+        }
+    }
+
+    @GetMapping("/{id}/ultimas")
+    public ResponseEntity<?> getUltimasNoticiasPorEmpresa(@PathVariable("id") Long idEmpresa) {
+        try {
+            // Obtener las últimas 3 noticias de la empresa ordenadas por fecha de publicación
+            List<Noticia> ultimasNoticias = noticiaRepository.findTop3ByEmpresaIdOrderByFechaPublicacionDesc(idEmpresa);
+            return ResponseEntity.ok(ultimasNoticias);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al buscar las últimas noticias de la empresa");
+        }
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<?> buscarNoticias(
+            @RequestParam(value = "query", required = false, defaultValue = "") String query,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "20") int size
+        ) {
+            try {
+                // Creamos un Pageable para la paginación
+                Pageable pageable = PageRequest.of(page, size);
+
+                // Buscamos las noticias que coincidan con el término de búsqueda
+                Page<Noticia> noticias = noticiaRepository.findByTituloContainingOrResumenContainingOrderByFechaPublicacionDesc(query, query, pageable);
+
+                return ResponseEntity.ok(noticias);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Error al buscar noticias");
+            }
+        }
 
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<?> createNoticia(@ModelAttribute NoticiaDTO noticiaDTO) {

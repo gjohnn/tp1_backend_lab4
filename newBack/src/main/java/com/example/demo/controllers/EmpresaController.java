@@ -23,6 +23,19 @@ public class EmpresaController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getEmpresa(@PathVariable("id") Long id) {
+        try {
+            Optional<Empresa> optionalEmpresa = empresaRepository.findById(id);
+            if (optionalEmpresa.isEmpty()) {
+                return ResponseEntity.badRequest().body("Empresa no encontrada");
+            }
+            return ResponseEntity.ok(optionalEmpresa.get());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al obtener empresa");
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> createEmpresa(@RequestBody Empresa empresa) {
         try {

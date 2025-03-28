@@ -1,12 +1,21 @@
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        // Hacer la solicitud GET a la API
-        const response = await fetch("http://localhost:8080/api/empresas");
-        const empresas = await response.json();
+        // Obtener el ID de la empresa desde la URL
+        const params = new URLSearchParams(window.location.search);
+        const empresaId = params.get("id");
 
-        if (empresas.length > 0) {
-            const empresa = empresas[0]; // Tomamos la primera empresa
+        if (!empresaId) {
+            console.error("No se proporcionó un ID de empresa.");
+            return;
+        }
 
+        // Hacer la solicitud GET a la API con el ID de la empresa
+        const response = await fetch(`http://localhost:8080/api/empresas/${empresaId}`);
+        const empresa = await response.json();
+
+        console.log("Datos de la empresa:", empresa);
+
+        if (empresa) {
             // Verificar si los elementos existen antes de modificarlos
             if (document.getElementById("telefono")) {
                 document.getElementById("telefono").innerText = empresa.telefono;
@@ -29,6 +38,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
             if (document.getElementById("footerDenominacion")) {
                 document.getElementById("footerDenominacion").innerText = empresa.denominacion;
+            }
+
+            // Actualizar el mapa con la ubicación de la empresa
+            if (empresa.latitud && empresa.longitud) {
+                const mapIframe = document.getElementById("mapa");
+                if (mapIframe) {
+                    mapIframe.src = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1000!2d${empresa.longitud}!3d${empresa.latitud}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar&z=15`;
+                }
             }
         }
     } catch (error) {

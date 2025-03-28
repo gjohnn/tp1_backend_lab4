@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/search.css">
 
     <!--JS-->
+	<script src="jsPropio/datosEmpresa.js"></script>
+	<script src="jsPropio/buscarNoticias.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/rd-smoothscroll.min.js"></script>
@@ -40,7 +42,7 @@
     <header>  
       <div class="container top-sect">
         <div class="navbar-header">
-          <h1 class="navbar-brand">
+          <h1 id="denominacion" class="navbar-brand">
             <a data-type='rd-navbar-brand'  href="./"><small>Denominación <br>Empresa</small></a>
           </h1>
           <a class="search-form_toggle" href="#"></a>
@@ -62,18 +64,18 @@
 					  <a href="home.html">INICIO</a>
 					</li>
 					<li style="list-style: none;">
-					  <a href="./">LISTA EMPRESAS</a>
+					  <a href="./index.html">LISTA EMPRESAS</a>
 					</li>
 				  </ul>                           
 				</div>
 			</nav>
-			<form class="search-form" action="buscador.html" method="GET" accept-charset="utf-8">
-			  <label class="search-form_label">
-				<input class="search-form_input" type="text" name="buscar" autocomplete="off" placeholder="Ingrese Texto"/>
-				<span class="search-form_liveout"></span>
-			  </label>
-			  <button class="search-form_submit fa-search" type="submit"></button>
-			</form>
+			<form class="search-form" id="searchForm" action="buscador.html" method="GET" accept-charset="utf-8">
+				<label class="search-form_label">
+				  <input class="search-form_input" type="text" name="buscar" id="searchInput" autocomplete="off" placeholder="Ingrese Texto"/>
+				  <span class="search-form_liveout"></span>
+				</label>
+				<button class="search-form_submit fa-search" type="submit"></button>
+			  </form>
 				 
         </div>
 
@@ -87,7 +89,7 @@
 
     <main>        
 
-      <section class="well well4">
+      <!-- <section class="well well4">
 		
         <div class="container">
 			
@@ -200,7 +202,8 @@
 			
           </div>
         </div>
-      </section>   
+      </section>    -->
+	  <div id="resultados"></div>
       
 
     </main>

@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="css/search.css">
 
     <!--JS-->
+    <script src="jsPropio/datosNoticias.js"></script>
+    <script src="jsPropio/buscarNoticias.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/rd-smoothscroll.min.js"></script>
-
 
     <!--[if lt IE 9]>
     <div style=' clear: both; text-align:center; position: relative;'>
@@ -40,7 +41,7 @@
     <header>  
       <div class="container top-sect">
         <div class="navbar-header">
-          <h1 class="navbar-brand">
+          <h1 id="denominacion" class="navbar-brand">
             <a data-type='rd-navbar-brand'  href="./"><small>Denominación <br>Empresa</small></a>
           </h1>
           <a class="search-form_toggle" href="#"></a>
@@ -48,32 +49,31 @@
 
         <div class="help-box text-right">
           <p>Telefono</p>
-          <a href="callto:#">800-2345-6789</a>
-          <small><span>Horario:</span>  6am-4pm PST M-Th; &nbsp;6am-3pm PST Fri</small>
+          <a id="telefono" href="callto:#">800-2345-6789</a>
         </div>
       </div>
      
-	  <div id="stuck_container" class="stuck_container">
+      <div id="stuck_container" class="stuck_container">
         <div class="container">   
-			<nav class="navbar navbar-default navbar-static-top pull-left">            
-				<div class="">  
-				  <ul class="nav navbar-nav sf-menu sf-js-enabled sf-arrows" data-type="navbar">
-					<li style="list-style: none;" class="active">
-					  <a href="home.html">INICIO</a>
-					</li>
-					<li style="list-style: none;">
-					  <a href="./">LISTA EMPRESAS</a>
-					</li>
-				  </ul>                           
-				</div>
-			</nav>
-			<form class="search-form" action="buscador.html" method="GET" accept-charset="utf-8">
-			  <label class="search-form_label">
-				<input class="search-form_input" type="text" name="buscar" autocomplete="off" placeholder="Ingrese Texto"/>
-				<span class="search-form_liveout"></span>
-			  </label>
-			  <button class="search-form_submit fa-search" type="submit"></button>
-			</form>
+          <nav class="navbar navbar-default navbar-static-top pull-left">            
+            <div class="">  
+              <ul class="nav navbar-nav sf-menu sf-js-enabled sf-arrows" data-type="navbar">
+                <li style="list-style: none;" class="active">
+                  <a href="home.html">INICIO</a>
+                </li>
+                <li style="list-style: none;">
+                  <a href="./index.html">LISTA EMPRESAS</a>
+                </li>
+              </ul>                           
+            </div>
+          </nav>
+          <form class="search-form" id="searchForm" action="buscador.html" method="GET" accept-charset="utf-8">
+            <label class="search-form_label">
+            <input class="search-form_input" type="text" name="buscar" id="searchInput" autocomplete="off" placeholder="Ingrese Texto"/>
+            <span class="search-form_liveout"></span>
+            </label>
+            <button class="search-form_submit fa-search" type="submit"></button>
+          </form>
              
         </div>
 
@@ -88,31 +88,29 @@
     <main>        
 
       <section class="well well4">
-		
+        
         <div class="container">
-			<center>
-				<div id="imagenPrincipal" style="height: 450px; background-image: url('http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626'); background-repeat: no-repeat;background-size: cover;">
-					<div style="text-align:left; background-color: rgba(1,1,1,0.5);color: #ffffff;font-size: 16px;line-height: 50px;">
-					 Titulo de la Noticia                        
-					</div>
-				</div>
-			</center>
-		  <h2>
-            Titulo de la Noticia
-          </h2>
-		  Fecha Publicacion: 12/02/2020
-		  <hr>
+          <center>
+            <div id="imagen" style="height: 450px; background-image: url('http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626'); background-repeat: no-repeat;background-size: cover;">
+              <div style="text-align:left; background-color: rgba(1,1,1,0.5);color: #ffffff;font-size: 16px;line-height: 50px;">
+                <span id="titulo">Titulo de la Noticia</span>                        
+              </div>
+            </div>
+          </center>
+          <h2 id="titulo"></h2>
+          <p id="fecha">Fecha Publicacion: 12/02/2020</p>
+          <hr>
           <div class="row offs2">
             
             <div class="col-lg-12">
               <dl class="terms-list">
                 <dt>
-					Resumen de la noticia
+                  <span id="resumen">Resumen de la noticia</span>
                 </dt>
-				<hr>
+                <hr>
                 <dd>
-					Contenido HTML de la Noticia
-				</dd>
+                  <div id="contenido">Contenido HTML de la Noticia</div>
+                </dd>
               </dl>
             </div>
           </div>
@@ -128,8 +126,8 @@
   <footer>
    <section class="well">
       <div class="container"> 
-            <p class="rights">
-              Denominación Empresa  &#169; <span id="copyright-year"></span>
+            <p id="denominacionFooter" class="rights">
+              Denominación Empresa  &#169; </p> <p><span id="copyright-year"></span>
               <a href="index-5.html">Privacy Policy</a>
               <!-- {%FOOTER_LINK} -->
             </p>           
