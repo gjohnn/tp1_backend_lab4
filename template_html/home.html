@@ -23,6 +23,11 @@
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/rd-smoothscroll.min.js"></script>
 
+    <!--JS Que Linkea Empresas y Noticias-->
+    <script src="js/datosEmpresa.js"></script>
+    <script src="js/datosNoticias.js"></script>
+    <!--JS Que Linkea Empresas y Noticias-->
+
 
     <!--[if lt IE 9]>
     <div style=' clear: both; text-align:center; position: relative;'>
@@ -44,15 +49,21 @@
       <div class="container top-sect">
         <div class="navbar-header">
           <h1 class="navbar-brand">
-            <a data-type='rd-navbar-brand'  href="./"><small>Denominación <br>Empresa</small></a>
+            <!--Esto me hizo poner para denominacion-->
+            <a data-type='rd-navbar-brand' href="./"><small id="denominacion"></small></a>
+            <!--Esto me hizo poner para denominacion-->
           </h1>
           <a class="search-form_toggle" href="#"></a>
         </div>
 
         <div class="help-box text-right">
           <p>Telefono</p>
-          <a href="callto:#">800-2345-6789</a>
-          <small><span>Horario:</span>  6am-4pm PST M-Th; &nbsp;6am-3pm PST Fri</small>
+          <!--Esto me hizo poner para Telefono-->
+          <a href="callto:#" id="telefono"></a>
+          <!--Esto me hizo poner para Telefono-->
+          <!--Esto me hizo poner para Horario-->
+          <small><span>Horario:</span> <span id="horario"></span></small>
+          <!--Esto me hizo poner para Horario-->
         </div>
       </div>
      
@@ -97,7 +108,9 @@
               <div class="camera_caption fadeIn">
                 <div class="jumbotron jumbotron1">
                   <em>
-                    <a href="detalle.html">Titulo Noticia</a>
+                    <!--Esto hay que agregarlo-->
+                    <a href="detalle.html">(DEBO COLOCAR EL TITULO DE LA NOTICIA QUE ESTA EN LA BASE DE DATOS)</a>
+                    <!--Esto hay que agregarlo-->                  
                   </em>
                   <div class="wrap">
                     <p>
@@ -112,7 +125,9 @@
               <div class="camera_caption fadeIn">
                 <div class="jumbotron jumbotron2">
                   <em>
-                    Titulo Noticia
+                    <!--Esto hay que agregarlo--> 
+                    (DEBO COLOCAR EL TITULO DE LA NOTICIA QUE ESTA EN LA BASE DE DATOS)
+                    <!--Esto hay que agregarlo--> 
                   </em>
                   <div class="wrap">
                     <p>
@@ -127,7 +142,9 @@
               <div class="camera_caption fadeIn">
                 <div class="jumbotron">
                   <em>
-                    Titulo Noticia
+                    <!--Esto hay que agregarlo--> 
+                    (DEBO COLOCAR EL TITULO DE LA NOTICIA QUE ESTA EN LA BASE DE DATOS)
+                    <!--Esto hay que agregarlo--> 
                   </em>
                   <div class="wrap">
                     <p>
@@ -150,9 +167,9 @@
         </h2>
           <div class="row">
             <div class="col">
-              <p style="text-align:justify">
-                Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
+              <!--Esto me hizo ponerlo para el QuienesSomos--> 
+              <p id="quienesSomos" style="text-align:justify"></p>
+              <!--Esto me hizo ponerlo para el QuienesSomos-->               
             </div>
           </div>
         </div>
@@ -177,11 +194,12 @@
 
     <section class="well1">
       <div class="container"> 
-            <p class="rights">
-              Denominación Empresa  &#169; <span id="copyright-year"></span>
-              <a href="index-5.html">Privacy Policy</a>
-              <!-- {%FOOTER_LINK} -->
-            </p>          
+        <!--Esto me hizo ponerlo para Denominacion Footer ¿?-->         
+        <p class="rights">
+          <span id="footerDenominacion"></span>  &#169; <span id="copyright-year"></span>
+          <a href="index-5.html">Privacy Policy</a>
+        </p>
+        <!--Esto me hizo ponerlo para Denominacion Footer ¿?-->         
       </div> 
     </section>    
   </footer>
